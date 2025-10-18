@@ -18,6 +18,7 @@
             display: flex;
             align-items: center;
             justify-content: center;            
+            flex-direction: column;
         }
 
         .prayerTime {
@@ -75,7 +76,7 @@
             });
         });
         window.addEventListener('deviceorientation',e=>{
-            document.getElementById('alpha').textContent = Math.floor(e.alpha);
+            document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
             document.getElementById('beta').textContent = Math.floor(e.beta);
             document.getElementById('gamma').textContent = Math.floor(e.gamma);
         });
