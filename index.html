@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .main {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;            
+        }
+
+        .prayerTime {
+            width: 250px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+            font-size: 1.3em;
+        }
+        .prayerTime div{
+            height: 50px;
+            border-bottom: 0.5px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
+
 <body>
-    <div id="la"></div>
-    <div id="lo"></div>
+    <div class="main">
+        <div class="prayerTime">
+            <div id="Fajr"></div>
+            <div id="Sunrise"></div>
+            <div id="Dhuhr"></div>
+            <div id="Asr"></div>
+            <div id="Sunset"></div>
+            <div id="Maghrib"></div>
+            <div id="Isha"></div>
+            <div id="Midnight"></div>
+        </div>
+    </div>
     <script>
         navigator.geolocation.getCurrentPosition(position => {
-            document.getElementById('la').innerHTML = position.coords.latitude;
-            document.getElementById('lo').innerHTML = position.coords.longitude;
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            fetch(`https://islamicapi.com/api/v1/prayer-time/?lat=${latitude}&lon=${longitude}&method=0&school=0&api_key=4brGSCzAZJVl1Z0lYEPky1FMSuBhHuuQrCECydhj9sPJW8ie`).then(res => res.json()).then(data => {
+                document.getElementById('Fajr').innerHTML =  data.data.times.Fajr;
+                document.getElementById('Sunrise').innerHTML = data.data.times.Sunrise;
+                document.getElementById('Dhuhr').innerHTML = data.data.times.Dhuhr;
+                document.getElementById('Asr').innerHTML = data.data.times.Asr;
+                document.getElementById('Sunset').innerHTML = data.data.times.Sunset;
+                document.getElementById('Maghrib').innerHTML = data.data.times.Maghrib;
+                document.getElementById('Isha').innerHTML = data.data.times.Isha;
+                document.getElementById('Midnight').innerHTML = data.data.times.Midnight;
+            });
         });
     </script>
 </body>
+
 </html>
