@@ -75,9 +75,9 @@
             });
         });
         window.addEventListener('deviceorientation',e=>{
-            document.getElementById('alpha').textContent = e.alpha;
-            document.getElementById('beta').textContent = e.beta;
-            document.getElementById('gamma').textContent = e.gamma;
+            document.getElementById('alpha').textContent = Math.floor(e.alpha);
+            document.getElementById('beta').textContent = Math.floor(e.beta);
+            document.getElementById('gamma').textContent = Math.floor(e.gamma);
         });
     </script>
 </body>
