@@ -53,6 +53,11 @@
             <li><span>Isha</span><span id="Isha"></span></li>
             <li><span>Midnight</span><span id="Midnight"></span></li>
         </ul>
+        <div class="compass">
+            <span>Alpha</span><span id="alpha"></span>
+            <span>Beta</span><span id="beta"></span>
+            <span>Gamma</span><span id="gamma"></span>
+        </div>
     </div>
     <script>
         navigator.geolocation.getCurrentPosition(position => {
@@ -68,6 +73,11 @@
                 document.getElementById('Isha').textContent = data.data.times.Isha;
                 document.getElementById('Midnight').textContent = data.data.times.Midnight;
             });
+        });
+        window.addEventListener('deviceorientation',e=>{
+            document.getElementById('alpha').textContent = e.alpha;
+            document.getElementById('beta').textContent = e.beta;
+            document.getElementById('gamma').textContent = e.gamma;
         });
     </script>
 </body>
