@@ -75,7 +75,7 @@
                 document.getElementById('Midnight').textContent = data.data.times.Midnight;
             });
         });
-        window.addEventListener('deviceorientation',e=>{
+        window.addEventListener('deviceorientationabsolute',e=>{
             document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
             document.getElementById('beta').textContent = Math.floor(e.beta);
             document.getElementById('gamma').textContent = Math.floor(e.gamma);
