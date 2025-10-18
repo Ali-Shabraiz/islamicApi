@@ -25,45 +25,48 @@
             border-radius: 20px;
             display: flex;
             flex-direction: column;
-            border: 1px solid black;
+            box-shadow: 0 0 10px black;
+            overflow: hidden;
             font-size: 1.3em;
         }
-        .prayerTime div{
+        .prayerTime  li{
             height: 50px;
+            list-style: none;
             border-bottom: 0.5px solid black;
             display: flex;
             align-items: center;
-            justify-content: center;
+            padding: 10px;
+            justify-content: space-between;
         }
     </style>
 </head>
 
 <body>
     <div class="main">
-        <div class="prayerTime">
-            <div id="Fajr"></div>
-            <div id="Sunrise"></div>
-            <div id="Dhuhr"></div>
-            <div id="Asr"></div>
-            <div id="Sunset"></div>
-            <div id="Maghrib"></div>
-            <div id="Isha"></div>
-            <div id="Midnight"></div>
-        </div>
+        <ul class="prayerTime">
+            <li><span>Fajr</span><span id="Fajr"></span></li>
+            <li><span>Sunrise</span><span id="Sunrise"></span></li>
+            <li><span>Dhuhr</span><span id="Dhuhr"></span></li>
+            <li><span>Asr</span><span id="Asr"></span></li>
+            <li><span>Sunset</span><span id="Sunset"></span></li>
+            <li><span>Maghrib</span><span id="Maghrib"></span></li>
+            <li><span>Isha</span><span id="Isha"></span></li>
+            <li><span>Midnight</span><span id="Midnight"></span></li>
+        </ul>
     </div>
     <script>
         navigator.geolocation.getCurrentPosition(position => {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-            fetch(`https://islamicapi.com/api/v1/prayer-time/?lat=${latitude}&lon=${longitude}&method=0&school=0&api_key=4brGSCzAZJVl1Z0lYEPky1FMSuBhHuuQrCECydhj9sPJW8ie`).then(res => res.json()).then(data => {
-                document.getElementById('Fajr').innerHTML =  data.data.times.Fajr;
-                document.getElementById('Sunrise').innerHTML = data.data.times.Sunrise;
-                document.getElementById('Dhuhr').innerHTML = data.data.times.Dhuhr;
-                document.getElementById('Asr').innerHTML = data.data.times.Asr;
-                document.getElementById('Sunset').innerHTML = data.data.times.Sunset;
-                document.getElementById('Maghrib').innerHTML = data.data.times.Maghrib;
-                document.getElementById('Isha').innerHTML = data.data.times.Isha;
-                document.getElementById('Midnight').innerHTML = data.data.times.Midnight;
+            fetch(`https://islamicapi.com/api/v1/prayer-time/?lat=${latitude}&lon=${longitude}&method=0&api_key=4brGSCzAZJVl1Z0lYEPky1FMSuBhHuuQrCECydhj9sPJW8ie`).then(res => res.json()).then(data => {
+                document.getElementById('Fajr').textContent =  data.data.times.Fajr;
+                document.getElementById('Sunrise').textContent = data.data.times.Sunrise;
+                document.getElementById('Dhuhr').textContent = data.data.times.Dhuhr;
+                document.getElementById('Asr').textContent = data.data.times.Asr;
+                document.getElementById('Sunset').textContent = data.data.times.Sunset;
+                document.getElementById('Maghrib').textContent = data.data.times.Maghrib;
+                document.getElementById('Isha').textContent = data.data.times.Isha;
+                document.getElementById('Midnight').textContent = data.data.times.Midnight;
             });
         });
     </script>
