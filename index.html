@@ -49,6 +49,14 @@
             font-size: 1.5em;
             border: 2px solid black;
         }
+        #neddle{
+            position: absolute;
+            width: 2px;
+            height: 250px;
+            left: 50%;
+            
+            background: black;
+        }
     </style>
 </head>
 
@@ -65,6 +73,7 @@
             <li><span>Midnight</span><span id="Midnight"></span></li>
         </ul>
         <div class="compass" id="compass">
+            <div id="neddle"></div>
             <span>Alpha</span><span id="alpha"></span>
             <!-- <span>Beta</span><span id="beta"></span> -->
             <!-- <span>Gamma</span><span id="gamma"></span> -->
@@ -90,7 +99,8 @@
             document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
             // document.getElementById('beta').textContent = Math.floor(e.beta);
             // document.getElementById('gamma').textContent = Math.floor(e.gamma);
-            compass.style.transform = `rotate(${e.alpha})`
+            compass.style.transform = `rotate(${-e.alpha}deg)`;
+
         });
     </script>
 </body>
