@@ -64,14 +64,14 @@
             <li><span>Isha</span><span id="Isha"></span></li>
             <li><span>Midnight</span><span id="Midnight"></span></li>
         </ul>
-        <div class="compass">
+        <div class="compass" id="compass">
             <span>Alpha</span><span id="alpha"></span>
             <!-- <span>Beta</span><span id="beta"></span> -->
             <!-- <span>Gamma</span><span id="gamma"></span> -->
         </div>
     </div>
     <script>
-        var compass = document.querySelector('.compass');
+        var compass = document.getElementById('compass');
         navigator.geolocation.getCurrentPosition(position => {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
@@ -90,7 +90,7 @@
             document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
             // document.getElementById('beta').textContent = Math.floor(e.beta);
             // document.getElementById('gamma').textContent = Math.floor(e.gamma);
-            compass.style.transform = `rotateZ(${e.alpha})`;
+            compass.style.transform = `rotate(${e.alpha})`
         });
     </script>
 </body>
