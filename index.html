@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -78,6 +79,15 @@
             transform: translateX(-50%);
             font-size: 0.6em;
         }
+        .kaaba{
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            font-size: 0.8em;
+            padding-top: 20px;
+            height: 100%;
+            rotate: var(--r);
+        }
 
         
     </style>
@@ -120,6 +130,14 @@
                 document.getElementById('Maghrib').textContent = data.data.times.Maghrib;
                 document.getElementById('Isha').textContent = data.data.times.Isha;
                 document.getElementById('Midnight').textContent = data.data.times.Midnight;
+                console.log(data)
+                var KaabaIcon = document.createElement('span');
+                KaabaIcon.classList.add('fa');
+                KaabaIcon.classList.add('fa-kaaba');
+                KaabaIcon.classList.add('kaaba');
+                // console.log(data.data.qibla)
+                KaabaIcon.style.setProperty('--r',`${data.data.qibla.direction.degrees}deg`);
+                compass.appendChild(KaabaIcon);
             });
         });
         window.addEventListener('deviceorientationabsolute',e=>{
