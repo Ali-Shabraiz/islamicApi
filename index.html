@@ -39,6 +39,16 @@
             padding: 10px;
             justify-content: space-between;
         }
+        .compass{
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            border: 2px solid black;
+        }
     </style>
 </head>
 
@@ -56,11 +66,12 @@
         </ul>
         <div class="compass">
             <span>Alpha</span><span id="alpha"></span>
-            <span>Beta</span><span id="beta"></span>
-            <span>Gamma</span><span id="gamma"></span>
+            <!-- <span>Beta</span><span id="beta"></span> -->
+            <!-- <span>Gamma</span><span id="gamma"></span> -->
         </div>
     </div>
     <script>
+        var compass = document.querySelector('.compass');
         navigator.geolocation.getCurrentPosition(position => {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
@@ -77,8 +88,9 @@
         });
         window.addEventListener('deviceorientationabsolute',e=>{
             document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
-            document.getElementById('beta').textContent = Math.floor(e.beta);
-            document.getElementById('gamma').textContent = Math.floor(e.gamma);
+            // document.getElementById('beta').textContent = Math.floor(e.beta);
+            // document.getElementById('gamma').textContent = Math.floor(e.gamma);
+            compass.style.transform = `rotateZ(${e.alpha})`;
         });
     </script>
 </body>
