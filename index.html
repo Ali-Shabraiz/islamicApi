@@ -48,15 +48,38 @@
             justify-content: center;
             font-size: 1.5em;
             border: 2px solid black;
+            position: relative;
         }
-        #neddle{
+        .compass .mark{
             position: absolute;
-            width: 2px;
-            height: 250px;
+            height: 100%;
+            width: 3px;
+            top: 0;
             left: 50%;
-            
+            transform: translateX(-50%);
+            rotate: var(--r);
+            display: flex;
+        }
+        .compass .mark::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 10px;
+            width: 3px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .compass .mark:nth-child(6n+3)::after{
             background: black;
         }
+        .compass .mark:nth-child(6n+3)::before{
+            content: attr(data-r);
+            position: absolute;
+            top: -20px;
+            transform: translateX(-50%);
+            font-size: 0.6em;
+        }
+
+        
     </style>
 </head>
 
@@ -73,14 +96,18 @@
             <li><span>Midnight</span><span id="Midnight"></span></li>
         </ul>
         <div class="compass" id="compass">
-            <div id="neddle"></div>
             <span>Alpha</span><span id="alpha"></span>
-            <!-- <span>Beta</span><span id="beta"></span> -->
-            <!-- <span>Gamma</span><span id="gamma"></span> -->
         </div>
     </div>
     <script>
         var compass = document.getElementById('compass');
+        for(var i =0;i < 360;i+=5){
+            var element = document.createElement('span');
+            element.classList.add('mark');
+            element.style.setProperty('--r',`${i}deg`);
+            element.setAttribute('data-r',i);
+            compass.appendChild(element)
+        }
         navigator.geolocation.getCurrentPosition(position => {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
@@ -96,7 +123,7 @@
             });
         });
         window.addEventListener('deviceorientationabsolute',e=>{
-            document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
+            document.getElementById('alpha').textContent = `${360 - Math.floor(e.alpha)}`;
             // document.getElementById('beta').textContent = Math.floor(e.beta);
             // document.getElementById('gamma').textContent = Math.floor(e.gamma);
             compass.style.transform = `rotate(${e.alpha}deg)`;
