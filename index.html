@@ -95,7 +95,7 @@
 
 <body>
     <div class="main">
-        <ul class="prayerTime">
+        <ul class="prayerTime" onclick="getData()">
             <li><span>Fajr</span><span id="Fajr"></span></li>
             <li><span>Sunrise</span><span id="Sunrise"></span></li>
             <li><span>Dhuhr</span><span id="Dhuhr"></span></li>
@@ -118,7 +118,8 @@
             element.setAttribute('data-r',i);
             compass.appendChild(element)
         }
-        navigator.geolocation.getCurrentPosition(position => {
+        function getData(){
+            navigator.geolocation.getCurrentPosition(position => {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
             fetch(`https://islamicapi.com/api/v1/prayer-time/?lat=${latitude}&lon=${longitude}&method=0&api_key=4brGSCzAZJVl1Z0lYEPky1FMSuBhHuuQrCECydhj9sPJW8ie`).then(res => res.json()).then(data => {
@@ -138,8 +139,12 @@
                 // console.log(data.data.qibla)
                 KaabaIcon.style.setProperty('--r',`${data.data.qibla.direction.degrees}deg`);
                 compass.appendChild(KaabaIcon);
+            }).catch(err => {
+                confirm(err);
             });
         });
+        }
+        getData()
         window.addEventListener('deviceorientationabsolute',e=>{
             document.getElementById('alpha').textContent = `${360 - Math.floor(e.alpha)}`;
             // document.getElementById('beta').textContent = Math.floor(e.beta);
