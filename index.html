@@ -99,7 +99,7 @@
             document.getElementById('alpha').textContent = 360 - Math.floor(e.alpha);
             // document.getElementById('beta').textContent = Math.floor(e.beta);
             // document.getElementById('gamma').textContent = Math.floor(e.gamma);
-            compass.style.transform = `rotate(${-e.alpha}deg)`;
+            compass.style.transform = `rotate(${e.alpha}deg)`;
 
         });
     </script>
